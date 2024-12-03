@@ -1,0 +1,97 @@
+
+-- Insertar 5 buses 
+
+INSERT INTO Transporte (IdTransporte, Tipo, Modelo, Capacidad, FechaCompra, Estado, Conductor)
+VALUES
+(1, 1, 'Volvo B11R', 50, '2023-05-01', 'Bueno', 'JP123'),
+(2, 1, 'Mercedes-Benz O500', 45, '2022-11-15', 'Bueno', 'LG567'),
+(3, 1, 'Scania K440', 55, '2023-02-20', 'Nuevo', 'ML876'),
+(4, 1, 'MAN RR2', 40, '2021-09-10', 'Bueno', 'ML876'),
+(5, 1, 'IVECO Crossway', 60, '2020-06-18', 'Malo', 'JP123');
+
+--Nota: en la tabla tipoTransporte 1=bus 
+
+--Insertar 3 Conductores:
+INSERT INTO Empleado (Codigo, Nombre, Identificacion, Tipo, Experiencia)
+VALUES
+('JP123', 'Juan Pérez', 123, 1, '5 años'),
+('ML876', 'María López', 876, 1, '3 años'),
+('LG567', 'Luis García', 567, 1, '4 años');
+--Nota: en la tabla rolEmpleado 1= Conductor 
+
+--Insertar 3 operarios:
+INSERT INTO Empleado (Codigo, Nombre, Identificacion, Tipo, Experiencia)
+VALUES
+('AM345', 'Ana Martínez', 345, 2, '2 años'),
+('CJ789', 'Carlos Jiménez', 789, 2, '3 años'),
+('LT901', 'Laura Torres', 901, 2, '1 año');
+--Nota: en la tabla rolEmpleado 2 debe corresponder a Operario
+
+ALTER TABLE Estacion
+ADD Tipo VARCHAR(50);
+
+-- Insertar estaciones de tipo "red de troncales"
+INSERT INTO Estacion (IdEstacion, Altitud, Latitud, Nombre, CapacidadMaxima, Tipo)
+VALUES 
+(1, 200.5, -80.2, 'Troncal Norte', 1000, 'red de troncales'),
+(2, 210.0, -81.3, 'Troncal Sur', 1200, 'red de troncales'),
+(3, 195.8, -79.7, 'Troncal Este', 900, 'red de troncales'),
+(4, 205.6, -78.9, 'Troncal Oeste', 1100, 'red de troncales'),
+(5, 198.3, -80.0, 'Troncal Central', 950, 'red de troncales');
+
+-- Insertar estaciones de tipo "estaciones"
+INSERT INTO Estacion (IdEstacion, Altitud, Latitud, Nombre, CapacidadMaxima, Tipo)
+VALUES 
+(6, 100.4, -75.1, 'Estación A', 500, 'estaciones'),
+(7, 102.3, -74.8, 'Estación B', 450, 'estaciones'),
+(8, 105.5, -74.2, 'Estación C', 550, 'estaciones'),
+(9, 103.7, -75.6, 'Estación D', 400, 'estaciones'),
+(10, 101.9, -74.5, 'Estación E', 480, 'estaciones');
+
+-- Insertar estaciones de tipo "troncales planeadas"
+INSERT INTO Estacion (IdEstacion, Altitud, Latitud, Nombre, CapacidadMaxima, Tipo)
+VALUES 
+(11, 150.6, -72.3, 'Troncal Planeada 1', 700, 'troncales planeadas'),
+(12, 152.8, -73.5, 'Troncal Planeada 2', 650, 'troncales planeadas'),
+(13, 154.1, -73.0, 'Troncal Planeada 3', 720, 'troncales planeadas'),
+(14, 151.7, -72.8, 'Troncal Planeada 4', 600, 'troncales planeadas'),
+(15, 153.3, -73.2, 'Troncal Planeada 5', 680, 'troncales planeadas');
+
+
+--Insertar mantenimiento 
+INSERT INTO Mantenimiento (IdMantenimiento, Fecha, Descripcion, RealizadoA)
+VALUES 
+(1, '2024-12-01', 'Cambio de filtros de aire en estación principal.', 'Troncal Norte'),
+(2, '2024-12-02', 'Revisión general del sistema eléctrico.', 'Troncal Sur'),
+(3, '2024-12-03', 'Reparación de plataforma de acceso.', 'Estación A'),
+(4, '2024-12-04', 'Mantenimiento preventivo de escaleras mecánicas.', 'Troncal Central'),
+(5, '2024-12-05', 'Actualización de señalización en la estación.', 'Estación B'),
+(6, '2024-12-06', 'Inspección de estructuras por daños.', 'Troncal Planeada 1');
+
+--Tabla EmpleadoMantenimiento
+-- Asociar empleados con mantenimientos
+INSERT INTO EmpleadoMantenimiento (IdEmpleado, IdMantenimiento)
+VALUES
+('AM345', 1), -- Ana Martínez participó en el mantenimiento 1
+('CJ789', 1), -- Carlos Jiménez participó en el mantenimiento 1
+('LT901', 2), -- Laura Torres participó en el mantenimiento 2
+('AM345', 3), -- Ana Martínez participó en el mantenimiento 3
+('CJ789', 4), -- Carlos Jiménez participó en el mantenimiento 4
+('LT901', 5); -- Laura Torres participó en el mantenimiento 5
+
+--Insertar Rutas 
+INSERT INTO Ruta (IdRuta, Nombre, TiempoPromedio)
+VALUES
+(1, 'Ruta Central', 45), -- Ruta principal con un tiempo promedio de 45 minutos
+(2, 'Ruta Norte-Sur', 60), -- Conexión entre las troncales norte y sur
+(3, 'Ruta Periférica', 75); -- Ruta que rodea el perímetro de la ciudad
+
+--Insertar viajes
+INSERT INTO Viaje (IdViaje, IdTransporte, IdRuta, Fecha, Hora, EstimacionPasajeros)
+VALUES
+(1, 1, 1, '2024-12-01', '08:30:00', 30),
+(2, 2, 1, '2024-12-02', '09:15:00', 40),
+(3, 3, 2, '2024-12-02', '10:00:00', 25),
+(4, 4, 3, '2024-12-03', '11:45:00', 35),
+(5, 5, 2, '2024-12-03', '14:20:00', 50),
+(6, 1, 3, '2024-12-04', '16:00:00', 20);
